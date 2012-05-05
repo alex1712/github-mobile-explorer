@@ -40,6 +40,41 @@
 
     </div>
 
+    <div data-role="page" id="repos">
+
+      <div data-role="header">
+        <h1>Github Mobile Explorer</h1>
+      </div>
+
+      <div data-role="content">	
+        <p>Hello world</p>		
+        <label for="user-search">Search users:</label>
+        <input type="search" placeholder="e.g." name="user-search" id="user-search" value="" />
+        <div id="container">
+        </div>
+      </div>
+
+    </div>
+
+    <span id="repos-template" style="display:none">
+      <section>
+        <h1>REPO</h1>
+          <ul id="repoList" data-role="listview" >
+          {{#each repos}}
+            <li class="repoLi">
+              {{this.name}}
+            </li>
+            <div style="display:block; overflow:auto;">
+              Created at {{this.created_at}}<br/>
+              Description:<br/>
+              <span>
+                {{this.description}}
+              </span>
+            </div>
+          {{/each}}
+        </ul>
+      </section>
+    </span>
 
     <div id="user-template" style="display:none">
       <img src="{{avatar_url}}"/>

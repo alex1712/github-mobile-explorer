@@ -10,43 +10,6 @@
     <script src="repos.js" type="text/javascript" charset="utf-8"></script>
   </head> 
   <body> 
-
-    <div data-role="page">
-
-      <div data-role="header">
-        <h1>Github Mobile Explorer</h1>
-      </div><!-- /header -->
-
-      <div data-role="content">	
-        <p>Hello world</p>		
-        <label for="user-search">Search users:</label>
-        <input type="search" placeholder="e.g." name="user-search" id="user-search" value="" />
-        <div id="container">
-        </div>
-      </div><!-- /content -->
-
-    </div><!-- /page1 -->
-
-    <span id="user-template" style="display:none" type="text/x-handlebars-template">
-      <section>
-        <h1>REPO</h1>
-          <ul id="repoList" data-role="listview" >
-          {{#each repos}}
-            <li class="repoLi">
-              {{this.name}}
-            </li>
-            <div style="display:block; overflow:auto;">
-              Created at {{this.created_at}}<br/>
-              Description:<br/>
-              <span>
-                {{this.description}}
-              </span>
-            </div>
-          {{/each}}
-        </ul>
-        
-      </section>
-    </span>
   </body>
 </html>
 
