@@ -1,6 +1,8 @@
 $(document).ready -> 
-  $.getJSON({
-    url: "https://api.github.com/users/lenniboy?callback=?"
-    success: (data) -> 
-      alert(data)
-  })
+  
+  url = "https://api.github.com/users/lenniboy?callback=?"
+  
+  $.getJSON(url, (data)-> 
+      console.log(data)
+      console.log(status)
+  )
