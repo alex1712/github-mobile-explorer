@@ -28,12 +28,19 @@
 
     </div><!-- /page -->
 
-    
-  <script id="user-template" type="text/x-handlebars-template">
-    <h1>{{name}}</h1>
-    <strong>{{bio}}</strong>
-    {{location}}
-  </script>
+    <div id="user-template" style="display:none">
+      <h3>{{name}}</h3>
+      <img src="http://www.gravatar.com/avatar/{{gravatar_id}}"/>
+      {{#if bio}}
+        <strong>{{bio}}</strong>
+      {{/if}}
+      {{#if location}}
+        <div>Location: {{location}}</div>
+      {{/if}}
+      {{#if hireable}}
+        <div>Available for hire</div>
+      {{/if}}
+    </div>
   </body>
 </html>
 
