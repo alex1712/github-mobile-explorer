@@ -55,24 +55,20 @@
 
     <span id="repos-template" style="display:none">
       <section>
-        <h1>REPO</h1>
-          <ul id="repoList" data-role="listview" >
-          {{#each repos}}
-            <li class="repoLi">
-              <span data-role="collapsible">
-                <h3>{{this.name}}</h3>
-                <div style="display:block; overflow:auto;">
-                  Created at {{this.created_at}}<br/>
-                  {{#if this.description}}
-                    Description:<br/>
-                    <span>
-                      {{this.description}}
-                    </span>
-                  {{/if}}
-                </div>
-              </span>
-            </li>
-          {{/each}}
+        <ul id="repoList" data-role="listview" >
+        {{#each repos}}
+          <li class="repoLi">
+            <span data-role="collapsible">
+              <h2>{{this.name}}</h2>
+              <div style="display:block; overflow:auto;">
+                {{#if this.description}}
+                <p><em>{{this.description}}</em></p>
+                {{/if}}
+                <p>Created at {{this.created_at}}</p>
+              </div>
+            </span>
+          </li>
+        {{/each}}
         </ul>
       </section>
     </span>
