@@ -59,15 +59,19 @@
           <ul id="repoList" data-role="listview" >
           {{#each repos}}
             <li class="repoLi">
-              {{this.name}}
-            </li>
-            <div style="display:block; overflow:auto;">
-              Created at {{this.created_at}}<br/>
-              Description:<br/>
-              <span>
-                {{this.description}}
+              <span data-role="collapsible">
+                <h3>{{this.name}}</h3>
+                <div style="display:block; overflow:auto;">
+                  Created at {{this.created_at}}<br/>
+                  {{#if this.description}}
+                    Description:<br/>
+                    <span>
+                      {{this.description}}
+                    </span>
+                  {{/if}}
+                </div>
               </span>
-            </div>
+            </li>
           {{/each}}
         </ul>
       </section>
