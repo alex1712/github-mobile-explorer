@@ -25,14 +25,27 @@
         </div>
       </div><!-- /content -->
 
-    </div><!-- /page -->
+    </div><!-- /page1 -->
 
     <span id="user-template" style="display:none" type="text/x-handlebars-template">
-      <ul class="people_list">
-        {{#each repos}}
-        <li>{{this.name}}</li>
-        {{/each}}
-      </ul>
+      <section>
+        <h1>REPO</h1>
+          <ul id="repoList" data-role="listview" >
+          {{#each repos}}
+            <li class="repoLi">
+              {{this.name}}
+            </li>
+            <div style="display:block; overflow:auto;">
+              Created at {{this.created_at}}<br/>
+              Description:<br/>
+              <span>
+                {{this.description}}
+              </span>
+            </div>
+          {{/each}}
+        </ul>
+        
+      </section>
     </span>
   </body>
 </html>
