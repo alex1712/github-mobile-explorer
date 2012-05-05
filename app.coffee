@@ -16,6 +16,7 @@ $(document).ready ->
         source = $("#user-template").html();
         template = Handlebars.compile(source);
         $(".container").append(template(data))
+        $.mobile.changePage("#user")
       ) 
   )
 
