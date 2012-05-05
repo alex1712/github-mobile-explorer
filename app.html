@@ -20,17 +20,34 @@
       <div data-role="content">	
         <label for="user-search">Search users:</label>
         <input type="search" name="user-search" id="user-search" value="" />
-
+        <a href="#user" data-role="button">Search</a>
+        
         <div class="container">
           
         </div>
-      </div><!-- /content -->
+      </div>
 
-    </div><!-- /page -->
+    </div>
+    
+    <div data-role="page" id="user">
+
+      <div data-role="header">
+        <h1>User page</h1>
+      </div><!-- /header -->
+
+      <div data-role="content">	
+        User page 
+        <div class="container">
+          
+        </div>
+      </div>
+
+    </div>
+
 
     <div id="user-template" style="display:none">
+      <img src="{{avatar_url}}"/>
       <h3>{{name}}</h3>
-      <img src="http://www.gravatar.com/avatar/{{gravatar_id}}"/>
       {{#if bio}}
         <strong>{{bio}}</strong>
       {{/if}}
@@ -40,6 +57,7 @@
       {{#if hireable}}
         <div>Available for hire</div>
       {{/if}}
+      <a href="repos.html#{{login}}" data-role="button">{{login}}'s repositories</a>
     </div>
   </body>
 </html>
