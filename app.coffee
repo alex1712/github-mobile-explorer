@@ -13,7 +13,7 @@ GH =
     GH.getUserData(username, (data)->
       source = $("#user-template").html();
       template = Handlebars.compile(source);
-      $(".container").append(template(data))
+      $("#user .container").append(template(data))
       $("#user input[type=button]").button().click(()->
         GH.showRepos(username)
       )
