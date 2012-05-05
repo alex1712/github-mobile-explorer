@@ -12,6 +12,7 @@ GH =
       template = Handlebars.compile(source);
       $(".container").append(template(data))
       GH.user = username
+      $("#page input[type=button]").button()
       $.mobile.changePage("#user")
     ) 
 
