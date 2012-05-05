@@ -11,9 +11,9 @@ $(document).ready ->
       $(".container").empty()
       username = $(event.target).val()
       getUser(username, (data)->
-        h1 = $("<h1>").text(data.name)
-        img = $("<img>").attr("src", data.avatar_url)
-        $(".container").append(h1).append(img)
+        source = $("#user-template").html();
+        template = Handlebars.compile(source);
+        $(".container").append(template(data))
       ) 
   )
 
