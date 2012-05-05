@@ -5,13 +5,17 @@ getUser = (username, callback) ->
   )
 
 
-$(document).ready -> 
-  h1 = $("<h1>").text(data.name)
-  img = $("<img>").attr("src", data.avatar_url)
+$(document).ready ->
+  $("#user-search").keyup((event)->
+    if event.keyCode == 13
+      $(".container").empty()
+      username = $(event.target).val()
+      getUser(username, (data)->
+        h1 = $("<h1>").text(data.name)
+        img = $("<img>").attr("src", data.avatar_url)
+        $(".container").append(h1).append(img)
+      ) 
+  )
 
-  $(".container").append(h1).append(img)
-
-  console.log(data)
-  console.log(status)
 
 
