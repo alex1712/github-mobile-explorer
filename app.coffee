@@ -14,27 +14,30 @@ GH =
     $.each(GH._routes, (index, route)->
       $(document).delegate(route.selector, "pageinit", ()->
         GH._dispatch route.callback
-        $('[type='submit']').button('refresh');
       )
     )
     $(document).ready ->
       $(document).bind("pagechange", (event, options)->
         $.each(GH._routes, ()->
           if options.toPage.is(this.selector)
-            $('[type='submit']').button('refresh');
             GH._dispatch this.callback
         )
       )
   _params: () ->
-    searchString = window.location.hash.substring(window.location.hash.indexOf("?") + 1)
-    params = searchString.split "&"
+    href = window.location.href
+    if href.indexOf("?") != -1
+      searchString = href.substring(href.indexOf("?") + 1)
+      if searchString.indexOf("#") != -1
+        searchString = href.substring(0, href.indexOf("#"))
+      params = searchString.split "&"
     result = {}
-    $.each(params, () ->
-      val = this.split("=");
-      key = val[0]
-      value = val[1]
-      result[key] = value
-    )
+    if !!params
+      $.each(params, () ->
+        val = this.split("=");
+        key = val[0]
+        value = val[1]
+        result[key] = value
+      )
     return result
 
   #data access
@@ -79,7 +82,7 @@ GH.route("#repos", (params)->
 GH.route("#commit", (params)->
   username = params.username
   repo = params.repo
-  url = "https://api.github.com/repos/#{username}/#{repo}/commits"
+  url = "https://api.github.com/repos/#{username}/#{repo}/commits?callback=?"
   $("#commit .container").empty()
   $.getJSON(url, (data)-> 
     source   = $("#commit-template").html();
@@ -96,12 +99,12 @@ $(document).ready ->
   userSearch = $("#user-search")
   userSearch.keyup((event)->
     if event.keyCode == 13
-      username = $(event.target).val()
+      username = this.value
       $.mobile.changePage("#user?username=#{username}")
   )
   $("#search-button").click(()->
-    username = this.val();
+    userSearch = $("#user-search")
+    username = userSearch.val();
     $.mobile.changePage("#user?username=#{username}")
   )
-
 window.GH = GH
