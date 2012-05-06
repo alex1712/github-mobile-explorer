@@ -84,10 +84,10 @@ GH.route("#commit", (params)->
   repo = params.repo
   url = "https://api.github.com/repos/#{username}/#{repo}/commits?callback=?"
   $("#commit .container").empty()
-  $.getJSON(url, (data)-> 
+  $.getJSON(url, (response)-> 
     source   = $("#commit-template").html();
     template = Handlebars.compile(source);
-    template = template({commits: data.reverse()});
+    template = template({commits: response.data.reverse()});
     $("#commit .container").html(template)
     $('#commit #commitList').listview();
     $('#commit h1').text("#{username}'s repositories")
