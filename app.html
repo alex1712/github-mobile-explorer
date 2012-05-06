@@ -41,32 +41,35 @@
     </div>
 
     <div data-role="page" id="repos">
-
       <div data-role="header">
         <h1>Github Mobile Explorer</h1>
       </div>
-
       <div data-role="content">	
         <div class="container">
         </div>
       </div>
-
     </div>
-
+    
+    <div data-role="page" id="commit">
+      <div data-role="header">
+        <h1>Github Mobile Explorer</h1>
+      </div>
+      <div data-role="content">	
+        <div class="container">
+        </div>
+      </div>
+    </div>
+    
     <span id="repos-template" style="display:none">
       <section>
-        <ul id="repoList" data-role="listview" >
+        <ul id="repoList" data-role="listview" data-theme="b">
         {{#each repos}}
           <li class="repoLi">
-            <span data-role="collapsible">
-              <h2>{{this.name}}</h2>
-              <div style="display:block; overflow:auto;">
-                {{#if this.description}}
-                <p><em>{{this.description}}</em></p>
-                {{/if}}
-                <p>Created at {{this.created_at}}</p>
-              </div>
-            </span>
+            <h2><a href="{{this.url}}">{{this.name}}</a></h2>
+            {{#if this.description}}
+              <p style="padding-top:5px;">{{this.description}}</p>
+            {{/if}}
+            <p>Created at {{this.created_at}}</p>
           </li>
         {{/each}}
         </ul>
@@ -87,6 +90,21 @@
       {{/if}}
       <input type="button" value="{{login}}'s repositories"/>
     </div>
+    
+    <span id="commit-template" style="display:none">
+      <section>
+        <ul id="commitList" data-role="listview" data-theme="b">
+        {{#each commits}}
+          <li class="commitLi">
+            <h2><a href="{{this.commit.url}}">{{this.commit.author.name}}</a></h2>
+            <p style="padding-top:5px;">{{this.commit.message}}</p>
+            <p>Created at {{this.commit.author.date}}</p>
+          </li>
+        {{/each}}
+        </ul>
+      </section>
+    </span>
+
   </body>
 </html>
 

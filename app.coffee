@@ -14,12 +14,14 @@ GH =
     $.each(GH._routes, (index, route)->
       $(document).delegate(route.selector, "pageinit", ()->
         GH._dispatch route.callback
+        $('[type='submit']').button('refresh');
       )
     )
     $(document).ready ->
       $(document).bind("pagechange", (event, options)->
         $.each(GH._routes, ()->
           if options.toPage.is(this.selector)
+            $('[type='submit']').button('refresh');
             GH._dispatch this.callback
         )
       )
@@ -48,7 +50,7 @@ GH.route("#user", (params)->
   GH.getUserData(username, (data)->
     source = $("#user-template").html();
     template = Handlebars.compile(source);
-    $("#user .container").append(template(data))
+    $("#user .container").html(template(data))
     $("#user input[type=button]").button().click(()->
       $.mobile.changePage("#repos?username=#{username}")
     )
@@ -63,9 +65,29 @@ GH.route("#repos", (params)->
     source   = $("#repos-template").html();
     template = Handlebars.compile(source);
     template = template({repos: data.reverse()});
-    $("#repos .container").append(template)
+    $("#repos .container").html(template)
     $('#repos #repoList').listview();
     $('#repos h1').text("#{username}'s repositories")
+    $('#repos #repoList a').click(()->
+      repo = this.text
+      $.mobile.changePage("#commit?username=#{username}&repo=#{repo}")
+      return false
+    )
+  )
+)
+
+GH.route("#commit", (params)->
+  username = params.username
+  repo = params.repo
+  url = "https://api.github.com/repos/#{username}/#{repo}/commits"
+  $("#commit .container").empty()
+  $.getJSON(url, (data)-> 
+    source   = $("#commit-template").html();
+    template = Handlebars.compile(source);
+    template = template({commits: data.reverse()});
+    $("#commit .container").html(template)
+    $('#commit #commitList').listview();
+    $('#commit h1').text("#{username}'s repositories")
   )
 )
 
@@ -78,7 +100,7 @@ $(document).ready ->
       $.mobile.changePage("#user?username=#{username}")
   )
   $("#search-button").click(()->
-    username = userSearch.val();
+    username = this.val();
     $.mobile.changePage("#user?username=#{username}")
   )
 
