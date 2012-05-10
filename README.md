@@ -1,2 +1,2 @@
-google-movies-mobile
+github-mobile-explorer
 ====================
